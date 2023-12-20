@@ -1,7 +1,6 @@
 package ru.aasmc.aggregator.config
 
 import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig
-import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 import org.apache.kafka.clients.admin.NewTopic
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.Serdes
@@ -14,7 +13,6 @@ import org.springframework.kafka.config.KafkaStreamsConfiguration
 import org.springframework.kafka.config.TopicBuilder
 import ru.aasmc.aggregator.props.KafkaProps
 import ru.aasmc.aggregator.props.TopicProps
-import ru.aasmc.avro.AvroReview
 
 @Configuration
 @EnableKafkaStreams

@@ -5,7 +5,6 @@ import org.apache.kafka.streams.processor.api.Processor
 import org.apache.kafka.streams.processor.api.ProcessorContext
 import org.apache.kafka.streams.processor.api.Record
 import org.apache.kafka.streams.state.KeyValueStore
-import org.apache.kafka.streams.state.ValueAndTimestamp
 import org.slf4j.LoggerFactory
 import ru.aasmc.aggregator.props.TopicProps
 import ru.aasmc.avro.AvroProductRating
