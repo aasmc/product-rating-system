@@ -1,0 +1,2 @@
+include ':backend-service'
+include ':review-aggregator-service'

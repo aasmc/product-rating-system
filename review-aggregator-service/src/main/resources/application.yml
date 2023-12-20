@@ -1,0 +1,46 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: review-aggregator-service
+  kafka:
+    streams:
+      application-id: ${spring.application.name}
+      bootstrap-servers: ${kafkaprops.bootstrapServers}
+      state-dir: ${kafkaprops.stateDir}
+      properties:
+        schema.registry.url: ${kafkaprops.schemaRegistryUrl}
+    bootstrap-servers: ${kafkaprops.bootstrapServers}
+    consumer:
+      bootstrap-servers: ${kafkaprops.bootstrapServers}
+      group-id: ${spring.application.name}-consumer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      properties:
+        specific.avro.reader: true
+        schema.registry.url: http://localhost:8081
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+
+kafkaprops:
+  bootstrapServers: localhost:9092
+  schemaRegistryUrl: http://localhost:8081
+  autoOffsetReset: earliest
+  processingGuarantee: at_least_once
+  commitInterval: 1
+  sessionTimeout: 30000
+  stateDir: "/tmp/kafka-streams-aggregator"
+  appId: ${spring.application.name}
+  enableIdempotence: false
+  acks: all
+  clientId: ${spring.application.name}
+  enableExactlyOnce: false
+
+topicprops:
+  reviewTopic: debezium.public.product_reviews
+  aggregatedReviewsTopic: aggregated-reviews
+  aggregatedReviewsStore: aggregated-reviews-store
+  partitions: 3
+  replication: 1
+  punctuationInterval: 30s

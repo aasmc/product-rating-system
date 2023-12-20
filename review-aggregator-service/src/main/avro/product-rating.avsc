@@ -1,0 +1,18 @@
+{
+  "type": "record",
+  "name": "AvroProductRating",
+  "namespace": "ru.aasmc.avro",
+  "fields": [
+    {
+      "name": "productId",
+      "type": "long"
+    },
+    {
+      "name": "ratings",
+      "type": {
+        "type": "map",
+        "values": "int"
+      }
+    }
+  ]
+}

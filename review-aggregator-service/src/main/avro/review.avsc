@@ -1,0 +1,47 @@
+{
+  "type": "record",
+  "name": "AvroReview",
+  "namespace": "ru.aasmc.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "user_id",
+      "type": "long"
+    },
+    {
+      "name": "product_id",
+      "type": "long"
+    },
+    {
+      "name": "rating",
+      "type": "int"
+    },
+    {
+      "name": "created_at",
+      "type": {
+        "type": "long",
+        "connect.version": 1,
+        "connect.name": "io.debezium.time.MicroTimestamp"
+      }
+    },
+    {
+      "name": "comment",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "__deleted",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    }
+  ]
+}
