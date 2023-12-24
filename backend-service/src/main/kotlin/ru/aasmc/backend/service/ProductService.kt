@@ -12,6 +12,4 @@ interface ProductService {
 
     fun getAllProducts(from: Int, size: Int): List<ProductResponse>
 
-    fun getAllProductsSortedByWilsonScore(): List<ProductResponse>
-
 }

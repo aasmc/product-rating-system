@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import ru.aasmc.backend.dto.CreateProductRequest
 import ru.aasmc.backend.dto.ProductResponse
+import ru.aasmc.backend.service.OpenSearchService
 import ru.aasmc.backend.service.ProductService
 
 private val log = LoggerFactory.getLogger(ProductsController::class.java)
@@ -11,7 +12,8 @@ private val log = LoggerFactory.getLogger(ProductsController::class.java)
 @RestController
 @RequestMapping("/v1/products")
 class ProductsController(
-    private val productService: ProductService
+    private val productService: ProductService,
+    private val openSearchService: OpenSearchService
 ) {
 
     @PostMapping
@@ -23,7 +25,7 @@ class ProductsController(
     @GetMapping("/sorted")
     fun getSortedProducts(): List<ProductResponse> {
         log.info("Received request to GET all product sorted by wilson score")
-        return productService.getAllProductsSortedByWilsonScore()
+        return openSearchService.getAllProductsSortedByWilsonScore()
     }
 
     @GetMapping("/{id}")
