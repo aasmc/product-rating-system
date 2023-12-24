@@ -41,10 +41,11 @@ class AvroReviewPunctuator(
         val currentAggregatedRating = store.get(key)
         if (currentAggregatedRating != null) {
             val currentRatings = currentAggregatedRating.ratings
+            val maxTimestamp = maxOf(newRating.createdAt, currentAggregatedRating.createdAt)
             newRating.ratings.forEach { (ratingKey, ratingValue) ->
                 currentRatings.merge(ratingKey, ratingValue, Int::plus)
             }
-            store.put(key, AvroProductRating(newRating.productId, currentRatings))
+            store.put(key, AvroProductRating(newRating.productId, currentRatings, maxTimestamp))
         } else {
             store.put(key, newRating)
         }

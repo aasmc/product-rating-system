@@ -13,6 +13,10 @@
         "type": "map",
         "values": "int"
       }
+    },
+    {
+      "name": "createdAt",
+      "type": "long"
     }
   ]
 }

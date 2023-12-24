@@ -5,6 +5,8 @@ import org.springframework.data.elasticsearch.annotations.Document
 import org.springframework.data.elasticsearch.annotations.Field
 import org.springframework.data.elasticsearch.annotations.FieldType
 import java.math.BigDecimal
+import java.time.Instant
+import java.time.LocalDateTime
 
 @Document(indexName = "products")
 class OpenSearchProduct(
@@ -25,7 +27,9 @@ class OpenSearchProduct(
         "3" to 0,
         "4" to 0,
         "5" to 0,
-    )
+    ),
+    @Field(type = FieldType.Long, name = "updated_at")
+    var updatedAt: Long = Instant.now().toEpochMilli()
 ) {
     override fun toString(): String {
         return "OpenSearchProduct [id=$id, name=$name, description=$description, price=$price, wilsonScore=$wilsonScore, ratings=$ratings]"

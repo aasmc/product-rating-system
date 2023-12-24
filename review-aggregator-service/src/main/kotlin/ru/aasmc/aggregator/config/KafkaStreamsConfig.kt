@@ -22,6 +22,13 @@ class KafkaStreamsConfig(
 ) {
 
     @Bean
+    fun reviewTopic(): NewTopic =
+        TopicBuilder.name(topicProps.reviewTopic)
+            .partitions(topicProps.partitions)
+            .replicas(topicProps.replication)
+            .build()
+
+    @Bean
     fun aggregatedReviewsTopic(): NewTopic =
         TopicBuilder.name(topicProps.aggregatedReviewsTopic)
             .partitions(topicProps.partitions)

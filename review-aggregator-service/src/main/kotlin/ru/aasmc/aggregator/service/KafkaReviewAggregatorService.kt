@@ -86,7 +86,8 @@ class KafkaReviewAggregatorService(
             record.productId,
             hashMapOf(
                 convertDigitToString(record.rating) to 1
-            )
+            ),
+            record.createdAt
         )
 
     private fun convertDigitToString(digit: Int): String {

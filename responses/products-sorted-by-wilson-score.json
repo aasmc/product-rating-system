@@ -1,0 +1,142 @@
+[
+  {
+    "id": 5,
+    "name": "Product Five",
+    "price": 14.0,
+    "description": "Description Five",
+    "wilsonScore": 0.5118538596631975,
+    "ratings": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 4
+    }
+  },
+  {
+    "id": 4,
+    "name": "Product Four",
+    "price": 13.0,
+    "description": "Description Four",
+    "wilsonScore": 0.41770741047904003,
+    "ratings": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 3,
+      "5": 2
+    }
+  },
+  {
+    "id": 3,
+    "name": "Product Three",
+    "price": 12.0,
+    "description": "Description Three",
+    "wilsonScore": 0.2987857322245606,
+    "ratings": {
+      "1": 0,
+      "2": 0,
+      "3": 2,
+      "4": 2,
+      "5": 1
+    }
+  },
+  {
+    "id": 6,
+    "name": "Product Six",
+    "price": 15.0,
+    "description": "Description Six",
+    "wilsonScore": 0.26404786368925837,
+    "ratings": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 1
+    }
+  },
+  {
+    "id": 9,
+    "name": "Product Nine",
+    "price": 18.0,
+    "description": "Description Nine",
+    "wilsonScore": 0.20654329147389294,
+    "ratings": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1
+    }
+  },
+  {
+    "id": 7,
+    "name": "Product Seven",
+    "price": 16.0,
+    "description": "Description Seven",
+    "wilsonScore": 0.11790609179425604,
+    "ratings": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0
+    }
+  },
+  {
+    "id": 2,
+    "name": "Product Two",
+    "price": 11.0,
+    "description": "Description Two",
+    "wilsonScore": 0.09409051165901611,
+    "ratings": {
+      "1": 0,
+      "2": 3,
+      "3": 2,
+      "4": 0,
+      "5": 0
+    }
+  },
+  {
+    "id": 8,
+    "name": "Product Eight",
+    "price": 17.0,
+    "description": "Description Eight",
+    "wilsonScore": 0.0546190651458835,
+    "ratings": {
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 0,
+      "5": 0
+    }
+  },
+  {
+    "id": 1,
+    "name": "Product One",
+    "price": 10.0,
+    "description": "Description One",
+    "wilsonScore": 0.010529638390925532,
+    "ratings": {
+      "1": 3,
+      "2": 2,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    }
+  },
+  {
+    "id": 10,
+    "name": "Product Ten",
+    "price": 19.0,
+    "description": "Description Ten",
+    "wilsonScore": 0.0,
+    "ratings": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    }
+  }
+]

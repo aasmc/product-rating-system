@@ -27,7 +27,7 @@ spring:
 kafkaprops:
   bootstrapServers: localhost:9092
   schemaRegistryUrl: http://localhost:8081
-  autoOffsetReset: latest
+  autoOffsetReset: earliest
   processingGuarantee: at_least_once
   commitInterval: 1
   sessionTimeout: 30000
@@ -52,6 +52,7 @@ opensearch:
   password: admin
   scriptName: update-product-rating-score
   productIndex: products
+  clockDeltaMs: 10000
 
 logging:
   level:
