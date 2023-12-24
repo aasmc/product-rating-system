@@ -28,7 +28,7 @@ kafkaprops:
   bootstrapServers: localhost:9092
   schemaRegistryUrl: http://localhost:8081
   autoOffsetReset: earliest
-  processingGuarantee: at_least_once
+  processingGuarantee: exactly_once
   commitInterval: 1
   sessionTimeout: 30000
   stateDir: "/tmp/kafka-streams-aggregator"
