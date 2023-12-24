@@ -19,3 +19,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         show_sql: true
+
+opensearch:
+  uris: localhost:9200
+  username: admin
+  password: admin
+  wilsonScoreField: wilson-score

@@ -1,6 +1,8 @@
 version: '3'
 volumes:
   database:
+  opensearch-data1:
+  opensearch-data2:
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.2
@@ -11,6 +13,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - opensearch-net
 
   kafka:
     image: confluentinc/cp-kafka:7.5.2
@@ -32,6 +36,8 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+    networks:
+      - opensearch-net
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.5.2
@@ -46,6 +52,8 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka:29092'
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+    networks:
+      - opensearch-net
 
   connect:
     image: confluentinc/cp-server-connect:7.5.2
@@ -83,6 +91,8 @@ services:
         confluent-hub install --no-prompt debezium/debezium-connector-postgresql:2.2.1
         echo "Launching Kafka Connect worker"
         /etc/confluent/docker/run
+    networks:
+      - opensearch-net
   postgres:
     image: postgres:15
     environment:
@@ -98,3 +108,60 @@ services:
       -c wal_level=logical
       -c max_wal_senders=1
       -c max_replication_slots=1
+    networks:
+      - opensearch-net
+
+  opensearch-node1: # This is also the hostname of the container within the Docker network (i.e. https://opensearch-node1/)
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: opensearch-node1
+    environment:
+      - cluster.name=opensearch-cluster # Name the cluster
+      - node.name=opensearch-node1 # Name the node that will run in this container
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2 # Nodes to look for when discovering the cluster
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2 # Nodes eligibile to serve as cluster manager
+      - bootstrap.memory_lock=true # Disable JVM heap memory swapping
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
+      - plugins.security.ssl.http.enabled=false
+    ulimits:
+      memlock:
+        soft: -1 # Set memlock to unlimited (no soft or hard limit)
+        hard: -1
+      nofile:
+        soft: 65536 # Maximum number of open files for the opensearch user - set to at least 65536
+        hard: 65536
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data # Creates volume called opensearch-data1 and mounts it to the container
+    ports:
+      - 9200:9200 # REST API
+      - 9600:9600 # Performance Analyzer
+    networks:
+      - opensearch-net # All of the containers will join the same Docker bridge network
+  opensearch-node2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: opensearch-node2
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node2
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - plugins.security.ssl.http.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data2:/usr/share/opensearch/data
+    networks:
+      - opensearch-net
+
+networks:
+  opensearch-net:

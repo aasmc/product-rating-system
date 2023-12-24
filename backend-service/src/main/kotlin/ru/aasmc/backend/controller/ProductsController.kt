@@ -20,6 +20,12 @@ class ProductsController(
         return productService.createProduct(dto)
     }
 
+    @GetMapping("/sorted")
+    fun getSortedProducts(): List<ProductResponse> {
+        log.info("Received request to GET all product sorted by wilson score")
+        return productService.getAllProductsSortedByWilsonScore()
+    }
+
     @GetMapping("/{id}")
     fun getProduct(@PathVariable("id") id: Long): ProductResponse {
         log.info("Received request to GET product by id={}", id)

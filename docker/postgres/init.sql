@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS app_users(
     ID BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    USERNAME TEXT NOT NULL UNIQUE,
+    USERNAME TEXT NOT NULL,
     FIRST_NAME TEXT NOT NULL,
     LAST_NAME TEXT NOT NULL
 );
@@ -31,22 +31,5 @@ CREATE PUBLICATION product_reviews_publication FOR TABLE product_reviews;
 
 SELECT pg_create_logical_replication_slot('postgres_debezium', 'pgoutput');
 
-INSERT INTO app_users (username, first_name, last_name)
-VALUES
-    ('Alex', 'Alexander', 'AlexLastName'),
-    ('John', 'Doe', 'JohnLastName'),
-    ('Bob', 'Bobby', 'BobLastName'),
-    ('Kate', 'Katie', 'KateLastName'),
-    ('Lex', 'Lexie', 'LexLastName'),
-    ('Billy', 'Bill', 'BillLastName');
-
-INSERT INTO products(NAME, DESCRIPTION, PRICE)
-VALUES
-    ('Product One', 'Description One', 1.0),
-    ('Product Two', 'Description Two', 2.0),
-    ('Product Three', 'Description Three', 3.0),
-    ('Product Four', 'Description Four', 4.0),
-    ('Product Five', 'Description Five', 5.0),
-    ('Product Six', 'Description Six', 6.0);
 
 

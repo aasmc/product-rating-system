@@ -20,13 +20,14 @@ spring:
       properties:
         specific.avro.reader: true
         schema.registry.url: http://localhost:8081
-      auto-offset-reset: earliest
+      auto-offset-reset: ${kafkaprops.autoOffsetReset}
       enable-auto-commit: true
+
 
 kafkaprops:
   bootstrapServers: localhost:9092
   schemaRegistryUrl: http://localhost:8081
-  autoOffsetReset: earliest
+  autoOffsetReset: latest
   processingGuarantee: at_least_once
   commitInterval: 1
   sessionTimeout: 30000
@@ -44,3 +45,15 @@ topicprops:
   partitions: 3
   replication: 1
   punctuationInterval: 30s
+
+opensearch:
+  uris: localhost:9200
+  username: admin
+  password: admin
+  scriptName: update-product-rating-score
+  productIndex: products
+
+logging:
+  level:
+    org:
+      opensearch: TRACE

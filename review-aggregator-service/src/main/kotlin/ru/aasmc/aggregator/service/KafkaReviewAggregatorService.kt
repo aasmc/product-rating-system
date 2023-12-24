@@ -85,8 +85,19 @@ class KafkaReviewAggregatorService(
         AvroProductRating(
             record.productId,
             hashMapOf(
-                record.rating.toString() to 1
+                convertDigitToString(record.rating) to 1
             )
         )
+
+    private fun convertDigitToString(digit: Int): String {
+        return when(digit) {
+            1 -> "one"
+            2 -> "two"
+            3 -> "three"
+            4 -> "four"
+            5 -> "five"
+            else -> throw RuntimeException("Unsupported Rating: $digit")
+        }
+    }
 
 }

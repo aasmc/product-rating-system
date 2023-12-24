@@ -7,4 +7,5 @@ plugins {
     id 'com.github.imflog.kafka-schema-registry-gradle-plugin' version "1.12.0" apply false
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.9.20' apply false
     id "org.jetbrains.kotlin.plugin.allopen" version "1.9.20" apply false
+    id 'org.jetbrains.kotlin.plugin.noarg' version '1.9.20' apply false
 }
