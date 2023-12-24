@@ -52,7 +52,6 @@ opensearch:
   password: admin
   scriptName: update-product-rating-score
   productIndex: products
-  clockDeltaMs: 10000
 
 logging:
   level:

@@ -9,6 +9,5 @@ class OpenSearchProps @ConstructorBinding constructor(
     val username: String,
     val password: String,
     val scriptName: String,
-    val productIndex: String,
-    val clockDeltaMs: Long
+    val productIndex: String
 )

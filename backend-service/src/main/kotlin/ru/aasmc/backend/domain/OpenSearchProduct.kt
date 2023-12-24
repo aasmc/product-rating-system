@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType
 import java.math.BigDecimal
 import java.time.Instant
 import java.time.LocalDateTime
+import java.util.UUID
 
 @Document(indexName = "products")
 class OpenSearchProduct(
@@ -28,8 +29,8 @@ class OpenSearchProduct(
         "4" to 0,
         "5" to 0,
     ),
-    @Field(type = FieldType.Long, name = "updated_at")
-    var updatedAt: Long = Instant.now().toEpochMilli()
+    @Field(type = FieldType.Keyword, name = "rating_update_idempotency_key")
+    var ratingIdempotencyKey: String = UUID.randomUUID().toString()
 ) {
     override fun toString(): String {
         return "OpenSearchProduct [id=$id, name=$name, description=$description, price=$price, wilsonScore=$wilsonScore, ratings=$ratings]"

@@ -18,6 +18,7 @@ import ru.aasmc.aggregator.props.TopicProps
 import ru.aasmc.aggregator.util.AvroReviewPunctuator
 import ru.aasmc.avro.AvroProductRating
 import ru.aasmc.avro.AvroReview
+import java.util.UUID
 
 private val log = LoggerFactory.getLogger(KafkaReviewAggregatorService::class.java)
 
@@ -87,7 +88,7 @@ class KafkaReviewAggregatorService(
             hashMapOf(
                 convertDigitToString(record.rating) to 1
             ),
-            record.createdAt
+            UUID.randomUUID().toString()
         )
 
     private fun convertDigitToString(digit: Int): String {

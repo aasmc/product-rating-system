@@ -13,7 +13,7 @@ import ru.aasmc.avro.AvroProductRating
 private val log = LoggerFactory.getLogger(OpenSearchKafkaConsumer::class.java)
 
 private const val SCRIPT_SOURCE = """
-    if (ctx._source['updated_at'] + params.delta < params.created) {
+    if (ctx._source['rating_update_idempotency_key'] != params.idempotency_key) {
         if (params.containsKey('one')) {
             ctx._source.ratings['1'] = (ctx._source.ratings['1'] ?: 0) + params.one;
         }
@@ -42,8 +42,7 @@ private const val SCRIPT_SOURCE = """
     }
 """
 
-private const val DELTA_FIELD = "delta"
-private const val CREATED_FIELD = "created"
+private const val IDEMPOTENCY_KEY = "idempotency_key"
 
 @Service
 class OpenSearchKafkaConsumer(
@@ -62,8 +61,7 @@ class OpenSearchKafkaConsumer(
         record.ratings.forEach { (key, value) ->
             params[key] = value
         }
-        params[DELTA_FIELD] = props.clockDeltaMs
-        params[CREATED_FIELD] = record.createdAt
+        params[IDEMPOTENCY_KEY] = record.idempotencyKey
         val updateQuery = UpdateQuery.builder(record.productId.toString())
             .withScriptType(ScriptType.INLINE)
             .withLang("painless")

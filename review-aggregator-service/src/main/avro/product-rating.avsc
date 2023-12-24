@@ -15,8 +15,8 @@
       }
     },
     {
-      "name": "createdAt",
-      "type": "long"
+      "name": "idempotencyKey",
+      "type": "string"
     }
   ]
 }
