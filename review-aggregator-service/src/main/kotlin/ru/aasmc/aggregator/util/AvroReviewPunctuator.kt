@@ -44,7 +44,8 @@ class AvroReviewPunctuator(
             newRating.ratings.forEach { (ratingKey, ratingValue) ->
                 currentRatings.merge(ratingKey, ratingValue, Int::plus)
             }
-            store.put(key, AvroProductRating(newRating.productId, currentRatings, newRating.idempotencyKey))
+            val idempotencyKey = maxOf(newRating.idempotencyKey, currentAggregatedRating.idempotencyKey)
+            store.put(key, AvroProductRating(newRating.productId, currentRatings, idempotencyKey))
         } else {
             store.put(key, newRating)
         }

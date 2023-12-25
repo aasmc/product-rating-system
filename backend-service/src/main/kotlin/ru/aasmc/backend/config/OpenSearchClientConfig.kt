@@ -12,7 +12,7 @@ import ru.aasmc.backend.props.OpenSearchProps
 
 @Configuration
 @EnableElasticsearchRepositories(basePackages = ["ru.aasmc.backend"])
-class RestClientConfig(
+class OpenSearchClientConfig(
     private val openSearchProps: OpenSearchProps
 ): AbstractOpenSearchConfiguration() {
 

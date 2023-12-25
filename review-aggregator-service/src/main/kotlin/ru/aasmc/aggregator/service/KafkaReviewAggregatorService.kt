@@ -88,7 +88,7 @@ class KafkaReviewAggregatorService(
             hashMapOf(
                 convertDigitToString(record.rating) to 1
             ),
-            UUID.randomUUID().toString()
+            record.`lsn$1`
         )
 
     private fun convertDigitToString(digit: Int): String {

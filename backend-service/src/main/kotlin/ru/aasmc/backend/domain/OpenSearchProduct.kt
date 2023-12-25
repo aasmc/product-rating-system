@@ -29,8 +29,8 @@ class OpenSearchProduct(
         "4" to 0,
         "5" to 0,
     ),
-    @Field(type = FieldType.Keyword, name = "rating_update_idempotency_key")
-    var ratingIdempotencyKey: String = UUID.randomUUID().toString()
+    @Field(type = FieldType.Long, name = "rating_update_idempotency_key")
+    var ratingIdempotencyKey: Long? = null
 ) {
     override fun toString(): String {
         return "OpenSearchProduct [id=$id, name=$name, description=$description, price=$price, wilsonScore=$wilsonScore, ratings=$ratings]"

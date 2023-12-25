@@ -13,7 +13,8 @@ import ru.aasmc.avro.AvroProductRating
 private val log = LoggerFactory.getLogger(OpenSearchKafkaConsumer::class.java)
 
 private const val SCRIPT_SOURCE = """
-    if (ctx._source['rating_update_idempotency_key'] != params.idempotency_key) {
+    if (ctx._source['rating_update_idempotency_key'] == null ||
+     ctx._source['rating_update_idempotency_key'] < params.idempotency_key) {
         if (params.containsKey('one')) {
             ctx._source.ratings['1'] = (ctx._source.ratings['1'] ?: 0) + params.one;
         }

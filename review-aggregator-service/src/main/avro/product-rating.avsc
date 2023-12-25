@@ -16,7 +16,11 @@
     },
     {
       "name": "idempotencyKey",
-      "type": "string"
+      "type": [
+        "null",
+        "long"
+      ],
+      "default": null
     }
   ]
 }
