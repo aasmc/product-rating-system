@@ -25,6 +25,7 @@ class OpenSearchServiceImpl(
     private val openSearchRestTemplate: OpenSearchRestTemplate,
     private val openSearchProductDAO: OpenSearchProductDAO
 ) : OpenSearchService {
+
     override fun getAllProductsSortedByWilsonScore(): List<ProductResponse> {
         val searchQuery = NativeSearchQueryBuilder()
             .withQuery(QueryBuilders.matchAllQuery())
@@ -58,7 +59,8 @@ class OpenSearchServiceImpl(
         openSearchProduct.price = persistentProduct.price
         openSearchProduct.description = persistentProduct.description
         openSearchProduct.id = persistentProduct.id.toString()
-        val saved = openSearchProductDAO.save(openSearchProduct)
-        log.info("Successfully saved product to OpenSearch. {}", saved)
+        openSearchProductDAO.save(openSearchProduct).also {
+            log.info("Successfully saved product to OpenSearch. {}", it)
+        }
     }
 }
