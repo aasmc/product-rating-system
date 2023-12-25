@@ -39,7 +39,7 @@ private const val SCRIPT_SOURCE = """
         double n = (s1 * 1.0) + (s2 * 0.75) + (s3 * 0.5) + (s4 * 0.25) + (s5 * 0.0);
         double wilsonScore = p + n > 0 ? ((p + 1.9208) / (p + n) - 1.96 * Math.sqrt((p * n) / (p + n) + 0.9604) / (p + n)) / (1 + 3.8416 / (p + n)) : 0;
         ctx._source['wilson-score'] = wilsonScore;
-        ctx._source['updated_at'] = params.created;
+        ctx._source['rating_update_idempotency_key'] = params.idempotency_key;
     }
 """
 
